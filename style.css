@@ -530,3 +530,23 @@ th {
     transform: scale(1);
   }
 }
+
+@media (min-width: 768px) {
+  .rifas-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  #infos-rifa {
+    font-size: 12pt;
+  }
+
+  #back-image {
+    height: 100vh;
+    width: auto;
+  }
+
+  #participante {
+    height: 40vh;
+    width: 50vh;
+  }
+}

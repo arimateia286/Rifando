@@ -193,59 +193,53 @@ function colorButton(id, text, item) {
   label.textContent = `Cor ${text}`;
   colorButton.appendChild(label);
 
-  if (navigator.onLine) {
-    const pickr = Pickr.create({
-      el: pickerEl,
-      theme: 'nano',
 
-      default: actualColor,
+  const pickr = Pickr.create({
+    el: pickerEl,
+    theme: 'nano',
 
-      inline: false,
+    default: actualColor,
 
-      components: {
+    inline: false,
 
-        preview: true,
-        opacity: true,
-        hue: true,
+    components: {
 
-        interaction: {
-          hex: true,
-          rgba: true,
-          hsla: false,
-          hsva: false,
-          cmyk: true,
-          input: true,
-          clear: true,
-          save: true
-        },
-      }
-    });
+      preview: true,
+      opacity: true,
+      hue: true,
 
-    pickr.on('hide', instance => {
-      let color = pickr.getColor();
-      rifa[item] = color.toRGBA().toString();
-      changePointStyle();
+      interaction: {
+        hex: true,
+        rgba: true,
+        hsla: false,
+        hsva: false,
+        cmyk: true,
+        input: true,
+        clear: true,
+        save: true
+      },
+    }
+  });
 
-      pickr.applyColor();
-      pickr.hide();
-    });
+  pickr.on('hide', instance => {
+    let color = pickr.getColor();
+    rifa[item] = color.toRGBA().toString();
+    changePointStyle();
 
-    pickr.on('save', (color, instance) => {
-      rifa[item] = color.toRGBA().toString();
-      changePointStyle();
-      pickr.hide();
-    });
+    pickr.applyColor();
+    pickr.hide();
+  });
 
-    pickr.on('change', (color, source, instance) => {
-      rifa[item] = color.toRGBA().toString();
-      changePointStyle();
-    });
-  } else {
-    pickerEl.innerHTML = `<i class="fa-solid fa-square icon" style="color: ${actualColor}"></i>`;
-    pickerEl.addEventListener('click', () => {
-      alert('Só dá pra trocar as cores quando tu tiver com internet, man.');
-    });
-  }
+  pickr.on('save', (color, instance) => {
+    rifa[item] = color.toRGBA().toString();
+    changePointStyle();
+    pickr.hide();
+  });
+
+  pickr.on('change', (color, source, instance) => {
+    rifa[item] = color.toRGBA().toString();
+    changePointStyle();
+  });
 }
 
 function changePointStyle() {
