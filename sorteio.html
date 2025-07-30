@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sorteando</title>
+  <link rel="stylesheet" href="css/all.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <button id="home-button" onclick="goHome()">
+      <i class="fa-solid fa-house icon"></i>
+    </button>
+    <h4>Sorteando</h4>
+  </header>
+
+  <div class="main-container centered">
+    <div id="infos-rifa"></div>
+    <button id="ver-button" class="glassy">Ver Participantes</button>
+    <div id="participante">
+      <div id="numero-participante"><span style="font-family: 'SuperUnicorn';">Rifando</span></div>
+      <div id="nome-participante">Boa sorte!</div>
+    </div>
+
+    <div id="sortear-container">
+      <div id="checkbox-container">
+        <input type="checkbox" id="checkbox-participante">
+        <label for="checkbox-participante">Incluir não pagos</label>
+      </div>
+      <button id="sortear-button" class="glassy">Sortear</button>
+    </div>
+  </div>
+
+  <dialog id="participantes-dialog" class="generic-dialog">
+    <div class="dialog-button">PARTICIPANTES</div>
+
+    <div id="ptable-container">
+      <table id="participantes-table">
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Nome</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+    </div>
+    <div id="ok-button" class="dialog-button" onclick="closeParticipantesDialog()">
+      FECHAR</div>
+  </dialog>
+
+  <audio id="audio-win" src="sounds/aeee.mp3" preload="auto"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="utils.js"></script>
+  <script src="sorteio.js"></script>
+</body>
+
+</html>
