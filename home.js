@@ -23,22 +23,35 @@ importButton.addEventListener('click', () => {
   fileInput.accept = '.rifa,application/json';
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
+
+    if (!file) return;
+
     const reader = new FileReader();
     reader.onload = () => {
       try {
         const rifaData = reader.result;
+
+        JSON.parse(rifaData);
+
         const rifaName = file.name.replace('.rifa', '');
         if (localStorage.getItem(`rifando-${rifaName}`)) {
-          alert('Já existe uma rifa com esse nome!');
+          alert('Já existe uma rifa com esse nome! Importando como cópia.');
+          localStorage.setItem(`rifando-${rifaName} (cópia)`, rifaData);
         } else {
           localStorage.setItem(`rifando-${rifaName}`, rifaData);
-          loadRifasList();
         }
       } catch (e) {
         alert('Erro: ' + e.message);
       }
     };
     reader.readAsText(file);
+
+    setTimeout(() => {
+      loadRifasList();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    }, 500);
   });
   fileInput.click();
 });
@@ -130,6 +143,7 @@ function loadRifasList() {
           const a = document.createElement('a');
           a.href = url;
           a.download = `${key.toString().split('-')[1]}.rifa`;
+
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
