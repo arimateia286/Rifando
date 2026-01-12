@@ -1,7 +1,47 @@
 let mode = 'Sorteando', rifasList;
 
 const listContainer = get('list-container');
+const noRifasMessage = get('no-rifas-message');
+const buttonsContainer = get('buttons-container');
 const addButton = get('add-button');
+addButton.addEventListener('click', () => {
+  prompt("NOVA RIFA", "Nome da rifa")
+    .then((rifaName) => {
+      if (rifaName) {
+        if (localStorage.getItem(`rifando-${rifaName}`)) {
+          alert('Já existe uma rifa com esse nome!');
+        } else {
+          loadRifa(`rifando-${rifaName}`);
+        }
+      }
+    });
+});
+const importButton = get('import-button');
+importButton.addEventListener('click', () => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = '.rifa,application/json';
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const rifaData = reader.result;
+        const rifaName = file.name.replace('.rifa', '');
+        if (localStorage.getItem(`rifando-${rifaName}`)) {
+          alert('Já existe uma rifa com esse nome!');
+        } else {
+          localStorage.setItem(`rifando-${rifaName}`, rifaData);
+          loadRifasList();
+        }
+      } catch (e) {
+        alert('Erro: ' + e.message);
+      }
+    };
+    reader.readAsText(file);
+  });
+  fileInput.click();
+});
 const modeButton = get('mode-button');
 const appName = get('app-name');
 
@@ -13,7 +53,6 @@ function loadRifasList() {
     rifasList.className = 'rifas-list';
 
     keys.forEach(key => {
-
       const elementContainer = document.createElement('div');
       elementContainer.className = 'element-container glassy';
 
@@ -40,7 +79,7 @@ function loadRifasList() {
 
         const deleteButton = document.createElement('div');
         deleteButton.className = 'option-button';
-        deleteButton.textContent = 'Apagar rifa';
+        deleteButton.textContent = 'Apagar';
         deleteButton.addEventListener('click', () => {
           confirm('APAGAR RIFA', 'Deseja mesmo apagar essa rifa?')
             .then((result) => {
@@ -55,7 +94,7 @@ function loadRifasList() {
 
         const renameButton = document.createElement('div');
         renameButton.className = 'option-button';
-        renameButton.textContent = 'Renomear rifa';
+        renameButton.textContent = 'Renomear';
         renameButton.addEventListener('click', () => {
           prompt('RENOMEAR RIFA', 'Nome da Rifa')
             .then((result) => {
@@ -72,10 +111,30 @@ function loadRifasList() {
 
         const copyButton = document.createElement('div');
         copyButton.className = 'option-button';
-        copyButton.textContent = 'Copiar rifa';
+        copyButton.textContent = 'Copiar';
         copyButton.addEventListener('click', () => {
           localStorage.setItem(`${key.toString()} cópia`, localStorage.getItem(key.toString()));
           loadRifasList();
+          optionsDialog.close();
+          document.body.removeChild(optionsDialog);
+        });
+
+        const exportButton = document.createElement('div');
+        exportButton.className = 'option-button';
+        exportButton.textContent = 'Exportar';
+        exportButton.addEventListener('click', () => {
+          const rifaData = localStorage.getItem(key.toString());
+          const blob = new Blob([rifaData], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${key.toString().split('-')[1]}.rifa`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
           optionsDialog.close();
           document.body.removeChild(optionsDialog);
         });
@@ -88,7 +147,7 @@ function loadRifasList() {
           document.body.removeChild(optionsDialog);
         });
 
-        optionsDialog.append(optionsDialogTitle, deleteButton, renameButton, copyButton, closeDialogButton);
+        optionsDialog.append(optionsDialogTitle, deleteButton, renameButton, copyButton, exportButton, closeDialogButton);
 
         document.body.append(optionsDialog);
 
@@ -101,15 +160,10 @@ function loadRifasList() {
     });
 
     listContainer.appendChild(rifasList);
+    noRifasMessage.classList.remove('shown');
   } else {
     if (rifasList) listContainer.removeChild(rifasList);
-    const noRifasMessage = document.createElement('span');
-    noRifasMessage.className = 'no-rifas-message';
-    noRifasMessage.innerHTML =
-      `
-    Sem rifas por enquanto!<br>Crie uma pelo botão + abaixo, ou se é sua primeira vez aqui, clique no botão ? acima para saber mais.
-    `;
-    listContainer.appendChild(noRifasMessage);
+    noRifasMessage.classList.add('shown');
   }
 }
 
@@ -124,24 +178,12 @@ function loadSorteio(rifaName) {
 function changeMode() {
   if (mode === 'Rifando') {
     mode = 'Sorteando';
-    addButton.classList.add('hidden');
+    buttonsContainer.classList.remove('shown');
     modeButton.innerHTML = `<i class="fa-solid fa-ticket icon"></i>`;
   } else {
     mode = 'Rifando';
     modeButton.innerHTML = `<i class="fa-solid fa-clover icon"></i>`;
-    addButton.classList.remove('hidden');
-    addButton.addEventListener('click', () => {
-      prompt("NOVA RIFA", "Nome da rifa")
-        .then((rifaName) => {
-          if (rifaName) {
-            if (localStorage.getItem(`rifando-${rifaName}`)) {
-              alert('Já existe uma rifa com esse nome!');
-            } else {
-              loadRifa(`rifando-${rifaName}`);
-            }
-          }
-        });
-    });
+    buttonsContainer.classList.add('shown');
   }
 
   appName.textContent = mode;

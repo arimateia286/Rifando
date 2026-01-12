@@ -19,8 +19,18 @@
   </header>
 
   <div class="main-container">
-    <div id="list-container"></div>
-    <button id="add-button" class="glassy"><i class="fa-solid fa-plus icon"></i></button>
+    <div id="list-container">
+      <div id="no-rifas-message" class="no-rifas-message">
+        <span>
+          Sem rifas por enquanto! Crie pelo botão <i class="fa-solid fa-plus"></i>, importe pelo botão <i class="fa-solid fa-file-import"></i>,
+          ou se é sua primeira vez aqui, clique no botão <i class="fa-regular fa-circle-question"></i> acima para saber mais.
+        </span>
+      </div>
+    </div>
+    <div id="buttons-container" class="buttons-container shown">
+      <button id="import-button" class="glassy"><i class="fa-solid fa-file-import icon"></i></button>
+      <button id="add-button" class="glassy"><i class="fa-solid fa-plus icon"></i></button>
+    </div>
   </div>
 
   <dialog id="help-dialog" class="generic-dialog">
