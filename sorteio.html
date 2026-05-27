@@ -5,8 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Sorteando</title>
-  <link rel="stylesheet" href="css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+  <script src="utils.js" defer></script>
+  <script src="sorteio.js" defer></script>
 </head>
 
 <body>
@@ -34,33 +40,31 @@
     </div>
   </div>
 
-  <dialog id="participantes-dialog" class="generic-dialog">
-    <div class="dialog-button">PARTICIPANTES</div>
+  <div id="participantes-dialog" class="dialog-container hidden">
+    <dialog class="generic-dialog">
+      <div class="dialog-button">PARTICIPANTES</div>
 
-    <div id="ptable-container">
-      <table id="participantes-table">
-        <thead>
-          <tr>
-            <th>Número</th>
-            <th>Nome</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
+      <div id="ptable-container">
+        <table id="participantes-table">
+          <thead>
+            <tr>
+              <th>Número</th>
+              <th>Nome</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
 
-    </div>
-    <div id="ok-button" class="dialog-button" onclick="closeParticipantesDialog()">
-      FECHAR</div>
-  </dialog>
+      <div id="ok-button" class="dialog-button" onclick="closeParticipantesDialog()">
+        FECHAR</div>
+
+    </dialog>
+  </div>
 
   <audio id="audio-win" src="sounds/aeee.mp3" preload="auto"></audio>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="utils.js"></script>
-  <script src="sorteio.js"></script>
 </body>
 
 </html>

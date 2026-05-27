@@ -5,9 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Rifando Rifa</title>
-  <link rel="stylesheet" href="css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js " defer></script>
+  <script src="lib/jspdf.umd.min.js" defer></script>
+  <script src="lib/jspdf.plugin.autotable.js" defer></script>
+  <script src="utils.js" defer></script>
+  <script src="rifa.js" defer></script>
 </head>
 
 <body>
@@ -31,11 +40,11 @@
     </div>
     <div id="bar-container">
       <div id="button-container" class="glassy hidden">
-        <button class="normal-button" id="home-screen-button"><i class="fa-solid fa-home icon"></i>Tela
-          Inicial</button>
+        <button class="normal-button" id="home-screen-button"><i class="fa-solid fa-home icon"></i>Início</button>
         <button class="normal-button" id="screenshot-button"><i class="fa-solid fa-camera icon"></i>Print</button>
-        <button class="normal-button" id="toggle-view"><i class="fa-solid fa-table icon"></i>Ver Tabela</button>
-        <button class="normal-button hidden" id="pdf-button"><i class="fa-solid fa-file-pdf icon"></i>Exportar PDF</button>
+        <button class="normal-button" id="toggle-view"><i class="fa-solid fa-table icon"></i>Tabela</button>
+        <button class="normal-button hidden" id="pdf-button"><i class="fa-solid fa-file-pdf icon"></i>Exportar
+          PDF</button>
         <div id="buttons-row">
           <button class="normal-button" id="points-back"><i class="fa-solid fa-angle-left icon"></i>Anterior</button>
           <button class="normal-button" id="pages-count"></button>
@@ -43,7 +52,7 @@
           <button class="normal-button" id="points-amount"></button>
           <button class="normal-button" id="sold-points"></button>
           <label for="image-picker" class="normal-button">
-            <i class="fa-solid fa-image icon"></i>Trocar Imagem
+            <i class="fa-solid fa-image icon"></i>Fundo
           </label>
           <input type="file" id="image-picker" accept="image/*">
           <button class="normal-button" id="border-color-button"></button>
@@ -52,7 +61,7 @@
           <div id="transform-controls"></div>
         </div>
       </div>
-      <button id="config-button" class="glassy"><i class="fa-solid fa-cog icon"></i></button>
+      <button id="config-button" class="glassy"><i class="fa-solid fa-cog"></i></button>
     </div>
     <div id="slider-container" class="glassy hidden">
       <label for="slider" id="slider-label"></label>
@@ -63,13 +72,6 @@
       </div>
     </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js "></script>
-  <script src="lib/jspdf.umd.min.js"></script>
-  <script src="lib/jspdf.plugin.autotable.js"></script>
-  <script src="utils.js"></script>
-  <script src="rifa.js"></script>
 </body>
 
 </html>

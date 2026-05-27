@@ -1,146 +1,147 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Política de Privacidade</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-      @font-face {
-        font-family: "SuperUnicorn";
-        src: url("fonts/SuperUnicorn-3lm0L.ttf") format("truetype");
-      }
 
-      .font-super-unicorn {
-        font-family: "SuperUnicorn", sans-serif;
-      }
-    </style>
-  </head>
-  <body class="bg-[#1a1a1a]">
-    <div class="w-full h-screen">
-      <div class="w-full h-full text-[#00ff00] flex flex-col font-sans">
-        <header
-          class="flex items-center justify-center px-4 py-3 bg-[#1a1a1a] border-b border-zinc-800 sticky top-0 z-10"
-        >
-          <h1 class="text-2xl text-white font-super-unicorn tracking-tighter">
-            Rifando
-          </h1>
-        </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    @font-face {
+      font-family: "SuperUnicorn";
+      src: url("fonts/SuperUnicorn-3lm0L.ttf") format("truetype");
+    }
 
-        <div id="sections"></div>
-      </div>
+    .font-super-unicorn {
+      font-family: "SuperUnicorn", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-[#1a1a1a]">
+  <div class="w-full h-screen">
+    <div class="w-full h-full text-[#00ff00] flex flex-col font-sans">
+      <header
+        class="flex items-center justify-center px-4 py-3 bg-[#1a1a1a] border-b border-zinc-800 sticky top-0 z-10">
+        <h1 class="text-2xl text-white font-super-unicorn tracking-tighter">
+          Rifando
+        </h1>
+      </header>
+
+      <div id="sections"></div>
     </div>
+  </div>
 
-    <script defer>
-      const section_pt = {
-        language: "Português",
-        title: "Política de Privacidade",
-        sections: [
-          {
-            title: "1. Coleta de Informações",
-            content:
-              "O <span class='text-white font-super-unicorn'>Rifando</span> não coleta dados pessoais identificáveis diretamente em nossos servidores. No entanto, utilizamos serviços de terceiros para publicidade.",
-          },
-          {
-            title: "2. Anúncios (AdMob)",
-            content:
-              "Utilizamos o Google AdMob para exibir anúncios. O Google pode coletar e usar dados como o ID de Publicidade do seu Android para personalizar anúncios e analisar o tráfego.",
-          },
-          {
-            title: "3. Armazenamento Local",
-            content:
-              "Os dados das suas rifas (nomes, pontos e status) são armazenados localmente no seu dispositivo. Caso você limpe os dados do app ou o desinstale, essas informações poderão ser perdidas.",
-          },
-          {
-            title: "4. Segurança",
-            content:
-              "Empregamos medidas para proteger os dados do app, mas lembramos que nenhum método de transmissão ou armazenamento eletrônico é 100% seguro.",
-          },
-          {
-            title: "5. Contato",
-            content:
-              "Para dúvidas sobre privacidade, entre em contato através do e-mail de suporte disponível na Play Store.",
-          },
-        ],
-      };
+  <script defer>
+    const section_pt = {
+      language: "Português",
+      title: "Política de Privacidade",
+      sections: [
+        {
+          title: "1. Coleta de Informações",
+          content:
+            "O <span class='text-white font-super-unicorn'>Rifando</span> não coleta dados pessoais identificáveis diretamente em nossos servidores. No entanto, utilizamos serviços de terceiros para publicidade.",
+        },
+        {
+          title: "2. Anúncios (AdMob)",
+          content:
+            "Utilizamos o Google AdMob para exibir anúncios. O Google pode coletar e usar dados como o ID de Publicidade do seu Android para personalizar anúncios e analisar o tráfego.",
+        },
+        {
+          title: "3. Armazenamento Local",
+          content:
+            "Os dados das suas rifas (nomes, pontos e status) são armazenados localmente no seu dispositivo. Caso você limpe os dados do app ou o desinstale, essas informações poderão ser perdidas.",
+        },
+        {
+          title: "4. Segurança",
+          content:
+            "Empregamos medidas para proteger os dados do app, mas lembramos que nenhum método de transmissão ou armazenamento eletrônico é 100% seguro.",
+        },
+        {
+          title: "5. Contato",
+          content:
+            "Para dúvidas sobre privacidade, entre em contato através do e-mail de suporte disponível na Play Store.",
+        },
+      ],
+    };
 
-      const section_en = {
-        language: "English",
-        title: "Privacy Policy",
-        sections: [
-          {
-            title: "1. Data Collection",
-            content:
-              "<span class='text-white font-super-unicorn'>Rifando</span> does not collect personal data on its own servers. However, we use third-party services for advertising.",
-          },
-          {
-            title: "2. Ads (AdMob)",
-            content:
-              "We use Google AdMob to display ads. Google may collect and use data such as your Android Advertising ID to personalize ads and analyze traffic.",
-          },
-          {
-            title: "3. Local Storage",
-            content:
-              "Your raffle data (names, points, and status) is stored locally on your device. If you clear app data or uninstall it, this data may be lost.",
-          },
-          {
-            title: "4. Security",
-            content:
-              "We take measures to protect app data, but no method of transmission or storage is 100% secure.",
-          },
-          {
-            title: "5. Contact",
-            content:
-              "For privacy questions, contact us via the email listed on the Play Store.",
-          },
-        ],
-      };
+    const section_en = {
+      language: "English",
+      title: "Privacy Policy",
+      sections: [
+        {
+          title: "1. Data Collection",
+          content:
+            "<span class='text-white font-super-unicorn'>Rifando</span> does not collect personal data on its own servers. However, we use third-party services for advertising.",
+        },
+        {
+          title: "2. Ads (AdMob)",
+          content:
+            "We use Google AdMob to display ads. Google may collect and use data such as your Android Advertising ID to personalize ads and analyze traffic.",
+        },
+        {
+          title: "3. Local Storage",
+          content:
+            "Your raffle data (names, points, and status) is stored locally on your device. If you clear app data or uninstall it, this data may be lost.",
+        },
+        {
+          title: "4. Security",
+          content:
+            "We take measures to protect app data, but no method of transmission or storage is 100% secure.",
+        },
+        {
+          title: "5. Contact",
+          content:
+            "For privacy questions, contact us via the email listed on the Play Store.",
+        },
+      ],
+    };
 
-      const section_es = {
-        language: "Español",
-        title: "Política de privacidad",
-        sections: [
-          {
-            title: "1. Recopilación de información",
-            content:
-              "<span class='text-white font-super-unicorn'>Rifando</span> no recopila ningún dato personal directamente en nuestros servidores. Sin embargo, utilizamos servicios de terceros para mostrar publicidad.",
-          },
-          {
-            title: "2. Anuncios (AdMob)",
-            content:
-              "Utilizamos Google AdMob para mostrar anuncios. Google puede recopilar y utilizar datos como el ID de publicidad de tu dispositivo Android para personalizar anuncios y analizar el tráfico.",
-          },
-          {
-            title: "3. Almacenamiento local",
-            content:
-              "Tus datos de la rifa (nombres, puntos y estado) se almacenan localmente en tu dispositivo. Si borras los datos de la aplicación o la desinstalas, esta información puede perderse.",
-          },
-          {
-            title: "4. Seguridad",
-            content:
-              "Aplicamos medidas para proteger los datos de la aplicación, pero ten en cuenta que ningún método de transmisión o almacenamiento electrónico es 100% seguro.",
-          },
-          {
-            title: "5. Contacto",
-            content:
-              "Para consultas sobre privacidad, puedes contactarnos mediante el correo electrónico disponible en la Play Store.",
-          },
-        ],
-      };
+    const section_es = {
+      language: "Español",
+      title: "Política de privacidad",
+      sections: [
+        {
+          title: "1. Recopilación de información",
+          content:
+            "<span class='text-white font-super-unicorn'>Rifando</span> no recopila ningún dato personal directamente en nuestros servidores. Sin embargo, utilizamos servicios de terceros para mostrar publicidad.",
+        },
+        {
+          title: "2. Anuncios (AdMob)",
+          content:
+            "Utilizamos Google AdMob para mostrar anuncios. Google puede recopilar y utilizar datos como el ID de publicidad de tu dispositivo Android para personalizar anuncios y analizar el tráfico.",
+        },
+        {
+          title: "3. Almacenamiento local",
+          content:
+            "Tus datos de la rifa (nombres, puntos y estado) se almacenan localmente en tu dispositivo. Si borras los datos de la aplicación o la desinstalas, esta información puede perderse.",
+        },
+        {
+          title: "4. Seguridad",
+          content:
+            "Aplicamos medidas para proteger los datos de la aplicación, pero ten en cuenta que ningún método de transmisión o almacenamiento electrónico es 100% seguro.",
+        },
+        {
+          title: "5. Contacto",
+          content:
+            "Para consultas sobre privacidad, puedes contactarnos mediante el correo electrónico disponible en la Play Store.",
+        },
+      ],
+    };
 
-      const sections = [section_pt, section_en, section_es];
+    const sections = [section_pt, section_en, section_es];
 
-      const sectionsDiv = document.getElementById("sections");
+    const sectionsDiv = document.getElementById("sections");
 
-      for (const section of sections) {
-        renderSection(section);
-      }
+    for (const section of sections) {
+      renderSection(section);
+    }
 
-      function renderSection(section) {
-        let sectionsToRender = "";
+    function renderSection(section) {
+      let sectionsToRender = "";
 
-        for (const item of section.sections) {
-          sectionsToRender += `
+      for (const item of section.sections) {
+        sectionsToRender += `
             <section>
               <h3 class="text-[#00ff00] font-bold uppercase mb-2">
                 ${item.title}
@@ -148,11 +149,11 @@
               <p>${item.content}</p>
             </section>
           `;
-        }
+      }
 
-        const elementRoot = document.createElement("div");
-        elementRoot.className = "p-4";
-        elementRoot.innerHTML = `
+      const elementRoot = document.createElement("div");
+      elementRoot.className = "p-4";
+      elementRoot.innerHTML = `
           <hr class="border-zinc-800 mb-6" />
           <h2 class="text-[#00ff00] font-bold uppercase mb-2">
             ${section.language}
@@ -166,8 +167,9 @@
           </div>
           <hr class="border-zinc-800 mt-6" />
         `;
-        sectionsDiv.appendChild(elementRoot);
-      }
-    </script>
-  </body>
+      sectionsDiv.appendChild(elementRoot);
+    }
+  </script>
+</body>
+
 </html>

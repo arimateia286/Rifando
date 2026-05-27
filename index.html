@@ -5,15 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Rifando Home</title>
-  <link rel="stylesheet" href="css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css" />
+  <script src="utils.js" defer></script>
+  <script src="home.js" defer></script>
 </head>
 
 <body>
   <header class="header">
     <button id="mode-button" onclick="changeMode()"></button>
     <h4 id="app-name">Rifando</h4>
-    <button id="help-button" onclick="document.getElementById('help-dialog').showModal()">
+    <button id="help-button" onclick="document.getElementById('help-dialog').classList.remove('hidden')">
       <i class="fa-regular fa-circle-question icon"></i>
     </button>
   </header>
@@ -22,8 +26,10 @@
     <div id="list-container">
       <div id="no-rifas-message" class="no-rifas-message">
         <span>
-          Sem rifas por enquanto! Crie pelo botão <i class="fa-solid fa-plus"></i>, importe pelo botão <i class="fa-solid fa-file-import"></i>,
-          ou se é sua primeira vez aqui, clique no botão <i class="fa-regular fa-circle-question"></i> acima para saber mais.
+          Sem rifas por enquanto! Crie pelo botão <i class="fa-solid fa-plus"></i>, importe pelo botão <i
+            class="fa-solid fa-file-import"></i>,
+          ou se é sua primeira vez aqui, clique no botão <i class="fa-regular fa-circle-question"></i> acima para saber
+          mais.
         </span>
       </div>
     </div>
@@ -33,29 +39,30 @@
     </div>
   </div>
 
-  <dialog id="help-dialog" class="generic-dialog">
-    <div class="dialog-button">AJUDA</div>
-    <span>
-      Bem-vindo ao <span style="font-family: 'SuperUnicorn';">Rifando</span>! 🎉<br>
-      O <span style="font-family: 'SuperUnicorn';">Rifando</span> é um aplicativo para criação e gerenciamento de
-      rifas,
-      oferecendo total personalização dos
-      pontos—desde a quantidade até o estilo.<br><br>
-      📌 Como funciona?<br><br>
-      ✅ Marque os pontos vendidos e registre as informações dos compradores em uma tabela organizada.<br>
-      ✅ Personalize os pontos alterando cores, formatos e tamanhos.<br>
-      ✅ Use sua própria arte como fundo da rifa. Crie a imagem em qualquer editor, como Canva ou
-      Photoshop.<br><br>
-      🎨 Dicas para a imagem de fundo:<br><br>
-      📏 Tamanho recomendado: 1080x1920px (mas outras dimensões também funcionam).<br>
-      ⚠️ Reserve um espaço em branco onde os pontos da rifa serão exibidos no app.<br><br>
-      Agora é só começar a criar e gerenciar suas rifas com facilidade! 🚀
-    </span>
-    <div id="ok-button" class="dialog-button" onclick="document.getElementById('help-dialog').close()">Ok</div>
-  </dialog>
+  <div id="help-dialog" class="dialog-container hidden">
+    <div class="generic-dialog">
+      <div class="dialog-button">AJUDA</div>
+      <span>
+        Bem-vindo ao <span style="font-family: 'SuperUnicorn';">Rifando</span>! 🎉<br>
+        O <span style="font-family: 'SuperUnicorn';">Rifando</span> é um aplicativo para criação e gerenciamento de
+        rifas,
+        oferecendo total personalização dos
+        pontos—desde a quantidade até o estilo.<br><br>
+        📌 Como funciona?<br><br>
+        ✅ Marque os pontos vendidos e registre as informações dos compradores em uma tabela organizada.<br>
+        ✅ Personalize os pontos alterando cores, formatos e tamanhos.<br>
+        ✅ Use sua própria arte como fundo da rifa. Crie a imagem em qualquer editor, como Canva ou
+        Photoshop.<br><br>
+        🎨 Dicas para a imagem de fundo:<br><br>
+        📏 Tamanho recomendado: 1080x1920px (mas outras dimensões também funcionam).<br>
+        ⚠️ Reserve um espaço em branco onde os pontos da rifa serão exibidos no app.<br><br>
+        Agora é só começar a criar e gerenciar suas rifas com facilidade! 🚀
+      </span>
+      <div id="ok-button" class="dialog-button"
+        onclick="document.getElementById('help-dialog').classList.add('hidden')">Ok</div>
+    </div>
 
-  <script src="utils.js"></script>
-  <script src="home.js"></script>
+  </div>
 </body>
 
 </html>
