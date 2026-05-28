@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Sorteando</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,19 +18,22 @@
 
 <body>
   <header class="header">
-    <button id="home-button" onclick="goHome()">
-      <i class="fa-solid fa-house icon"></i>
+    <button id="home-button" aria-label="Voltar para a página inicial">
+      <i class="fa-solid fa-house"></i>
     </button>
-    <h4>Sorteando</h4>
+    <h4 id="app-name" class="font-super-unicorn">Sorteando</h4>
+    <button id="ver-button" aria-label="Ver Participantes">
+      <i class="fa-solid fa-people-group"></i>
+    </button>
   </header>
 
-  <div class="main-container centered">
+  <main class="main-container centered">
     <div id="infos-rifa"></div>
-    <button id="ver-button" class="glassy">Ver Participantes</button>
-    <div id="participante">
-      <div id="numero-participante"><span style="font-family: 'SuperUnicorn';">Rifando</span></div>
+
+    <section id="participante" aria-live="polite" aria-atomic="true">
+      <div id="numero-participante"><span class="font-super-unicorn">Rifando</span></div>
       <div id="nome-participante">Boa sorte!</div>
-    </div>
+    </section>
 
     <div id="sortear-container">
       <div id="checkbox-container">
@@ -38,19 +42,19 @@
       </div>
       <button id="sortear-button" class="glassy">Sortear</button>
     </div>
-  </div>
+  </main>
 
   <div id="participantes-dialog" class="dialog-container hidden">
-    <dialog class="generic-dialog">
-      <div class="dialog-button">PARTICIPANTES</div>
+    <dialog class="generic-dialog" open>
+      <header class="dialog-button">PARTICIPANTES</header>
 
       <div id="ptable-container">
         <table id="participantes-table">
           <thead>
             <tr>
-              <th>Número</th>
-              <th>Nome</th>
-              <th>Status</th>
+              <th scope="col">Número</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -58,9 +62,7 @@
         </table>
       </div>
 
-      <div id="ok-button" class="dialog-button" onclick="closeParticipantesDialog()">
-        FECHAR</div>
-
+      <button id="ok-button" class="dialog-button">FECHAR</button>
     </dialog>
   </div>
 

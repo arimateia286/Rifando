@@ -1,109 +1,173 @@
-(function injectCustomDialogs() {
-  const html = `
-  <div id="custom-prompt" class="dialog-container hidden">
-    <div class="generic-dialog">
-        <div id="custom-prompt-title" class="dialog-button centered"></div>
-        <input type="text" class="prompt-input" id="custom-prompt-input" autocomplete="off" required>
-        <div class="row">
-            <div class="dialog-button bordered" onclick="handlePromptCancel()">Cancelar</div>
-            <div class="dialog-button" onclick="handlePromptConfirm()">Ok</div>
+(() => {
+  // 1. Injeta o HTML apenas quando o DOM estiver pronto
+  const injectDialogs = () => {
+    const html = `
+      <div id="custom-prompt" class="dialog-container hidden">
+        <div class="generic-dialog">
+          <div class="dialog-title dialog-button centered"></div>
+          <input type="text" class="prompt-input" autocomplete="off" required>
+          <div class="dialog-btns-row">
+            <div class="dialog-button btn-cancel">Cancelar</div>
+            <div class="dialog-button btn-ok">Ok</div>
+          </div>
         </div>
-    </div>
-  </div>
+      </div>
 
-  <div id="custom-confirm" class="dialog-container hidden">
-    <div class="generic-dialog">
-        <div id="custom-confirm-title" class="dialog-button centered"></div>
-        <p id="custom-confirm-message"></p>
-        <div class="row">
-            <div class="dialog-button bordered" onclick="confirmResolve(false)">Não</div>
-            <div class="dialog-button" onclick="confirmResolve(true)">Sim</div>
+      <div id="custom-confirm" class="dialog-container hidden">
+        <div class="generic-dialog">
+          <div class="dialog-title dialog-button centered"></div>
+          <p class="dialog-message"></p>
+          <div class="dialog-btns-row">
+            <div class="dialog-button btn-no">Não</div>
+            <div class="dialog-button btn-yes">Sim</div>
+          </div>
         </div>
-    </div>
-  </div>
+      </div>
 
-  <div id="custom-alert" class="dialog-container hidden">
-    <div class="generic-dialog">
-        <div class="dialog-button centered">AVISO</div>
-        <p id="custom-alert-message"></p>
-        <div class="dialog-button" onclick="handleAlertClose()">Ok</div>
-    </div>
-  </div>
-  `;
+      <div id="custom-alert" class="dialog-container hidden">
+        <div class="generic-dialog">
+          <div class="dialog-button centered">AVISO</div>
+          <p class="dialog-message"></p>
+          <div class="dialog-button btn-close">Ok</div>
+        </div>
+      </div>
+    `;
 
-  const container = document.createElement("div");
-  container.innerHTML = html;
-  document.body.appendChild(container);
-})();
-
-const get = (id) => document.getElementById(id);
-
-let promptResolve, confirmResolve, alertResolve;
-
-function showCustomPrompt(titleMsg, placeholderStr, resolve) {
-  const dialog = get("custom-prompt");
-  const input = get("custom-prompt-input");
-  input.value = "";
-  const title = get("custom-prompt-title");
-
-  title.textContent = titleMsg;
-  input.placeholder = placeholderStr;
-  promptResolve = resolve;
-
-  dialog.classList.remove("hidden");
-}
-
-function handlePromptConfirm() {
-  const input = get("custom-prompt-input");
-  get("custom-prompt").classList.add("hidden");
-  promptResolve(input.value);
-}
-
-function handlePromptCancel() {
-  get("custom-prompt").classList.add("hidden");
-  promptResolve(null);
-}
-
-function showCustomConfirm(title, message, resolve) {
-  get("custom-confirm-title").textContent = title;
-  get("custom-confirm-message").textContent = message;
-  get("custom-confirm").classList.remove("hidden");
-  confirmResolve = (result) => {
-    get("custom-confirm").classList.add("hidden");
-    resolve(result);
+    const container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    setupEventListeners();
   };
-}
 
-function showCustomAlert(message) {
-  get("custom-alert-message").textContent = message;
-  get("custom-alert").classList.remove("hidden");
+  // Cache dos elementos para evitar buscas repetidas no DOM (Otimização de performance)
+  let elements = {};
 
-  return new Promise((resolve) => {
-    alertResolve = resolve;
-  });
-}
+  // 2. Vincula os eventos diretamente via JS (Adeus 'onclick' no HTML)
+  const setupEventListeners = () => {
+    elements = {
+      prompt: document.getElementById("custom-prompt"),
+      confirm: document.getElementById("custom-confirm"),
+      alert: document.getElementById("custom-alert"),
+    };
 
-function handleAlertClose() {
-  get("custom-alert").classList.add("hidden");
-  if (alertResolve) alertResolve();
-}
+    // Sub-elementos do Prompt
+    elements.promptInput = elements.prompt.querySelector(".prompt-input");
+    elements.promptTitle = elements.prompt.querySelector(".dialog-title");
 
-window.prompt = function (message, defaultText = "") {
-  return new Promise((resolve) => {
-    showCustomPrompt(message, defaultText, resolve);
-  });
-};
+    // Sub-elementos do Confirm
+    elements.confirmTitle = elements.confirm.querySelector(".dialog-title");
+    elements.confirmMessage = elements.confirm.querySelector(".dialog-message");
 
-window.confirm = function (title, message) {
-  return new Promise((resolve) => {
-    showCustomConfirm(title, message, resolve);
-  });
-};
+    // Sub-elementos do Alert
+    elements.alertMessage = elements.alert.querySelector(".dialog-message");
+  };
 
-window.alert = function (message) {
-  return showCustomAlert(message);
-};
+  // Executa a injeção assim que o DOM estiver disponível
+  if (document.body) injectDialogs();
+  else window.addEventListener("DOMContentLoaded", injectDialogs);
 
-function goHome() {
-  window.location.href = "index.html";
-}
+  // --- Sobrescrita dos Métodos Globais com Escopo Isolado ---
+
+  window.prompt = function (titleMsg, placeholderStr = "") {
+    return new Promise((resolve) => {
+      elements.promptTitle.textContent = titleMsg;
+      elements.promptInput.placeholder = placeholderStr;
+      elements.promptInput.value = "";
+      elements.prompt.classList.remove("hidden");
+      elements.promptInput.focus();
+
+      // Funções de limpeza de evento para evitar vazamento de memória (Memory Leak)
+      const handleConfirm = () => {
+        cleanup();
+        resolve(elements.promptInput.value);
+      };
+
+      const handleCancel = () => {
+        cleanup();
+        resolve(null);
+      };
+
+      const handleKeyDown = (e) => {
+        if (e.key === "Enter") handleConfirm();
+        if (e.key === "Escape") handleCancel();
+      };
+
+      const cleanup = () => {
+        elements.prompt.classList.add("hidden");
+        elements.prompt
+          .querySelector(".btn-ok")
+          .removeEventListener("click", handleConfirm);
+        elements.prompt
+          .querySelector(".btn-cancel")
+          .removeEventListener("click", handleCancel);
+        elements.promptInput.removeEventListener("keydown", handleKeyDown);
+      };
+
+      elements.prompt
+        .querySelector(".btn-ok")
+        .addEventListener("click", handleConfirm);
+      elements.prompt
+        .querySelector(".btn-cancel")
+        .addEventListener("click", handleCancel);
+      elements.promptInput.addEventListener("keydown", handleKeyDown);
+    });
+  };
+
+  window.confirm = function (title, message) {
+    return new Promise((resolve) => {
+      elements.confirmTitle.textContent = title;
+      elements.confirmMessage.textContent = message;
+      elements.confirm.classList.remove("hidden");
+
+      const handleYes = () => {
+        cleanup();
+        resolve(true);
+      };
+      const handleNo = () => {
+        cleanup();
+        resolve(false);
+      };
+
+      const cleanup = () => {
+        elements.confirm.classList.add("hidden");
+        elements.confirm
+          .querySelector(".btn-yes")
+          .removeEventListener("click", handleYes);
+        elements.confirm
+          .querySelector(".btn-no")
+          .removeEventListener("click", handleNo);
+      };
+
+      elements.confirm
+        .querySelector(".btn-yes")
+        .addEventListener("click", handleYes);
+      elements.confirm
+        .querySelector(".btn-no")
+        .addEventListener("click", handleNo);
+    });
+  };
+
+  window.alert = function (message) {
+    return new Promise((resolve) => {
+      elements.alertMessage.textContent = message;
+      elements.alert.classList.remove("hidden");
+
+      const handleClose = () => {
+        elements.alert.classList.add("hidden");
+        elements.alert
+          .querySelector(".btn-close")
+          .removeEventListener("click", handleClose);
+        resolve();
+      };
+
+      elements.alert
+        .querySelector(".btn-close")
+        .addEventListener("click", handleClose);
+    });
+  };
+
+  // Função utilitária global de navegação
+  window.goHome = function () {
+    window.location.href = "index.html";
+  };
+})();

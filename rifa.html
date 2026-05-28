@@ -5,14 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Rifando Rifa</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
 
+  <link rel="stylesheet" href="style.css" />
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js " defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js" defer></script>
   <script src="lib/jspdf.umd.min.js" defer></script>
   <script src="lib/jspdf.plugin.autotable.js" defer></script>
   <script src="utils.js" defer></script>
@@ -20,58 +22,70 @@
 </head>
 
 <body>
-  <div id="main-app">
-    <img id="back-image">
-    <div id="main-container">
+  <main id="main-app">
+    <img id="back-image" alt="" decoding="async">
+
+    <section id="main-container">
       <div id="rifa-container"></div>
+
       <div id="table-container" class="hidden">
         <table id="points-table">
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Ponto</th>
-              <th>Status</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Ponto</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
           </tbody>
         </table>
       </div>
-    </div>
-    <div id="bar-container">
+    </section>
+
+    <nav id="bar-container" aria-label="Controles do Aplicativo">
       <div id="button-container" class="glassy hidden">
         <button class="normal-button" id="home-screen-button"><i class="fa-solid fa-home icon"></i>Início</button>
         <button class="normal-button" id="screenshot-button"><i class="fa-solid fa-camera icon"></i>Print</button>
         <button class="normal-button" id="toggle-view"><i class="fa-solid fa-table icon"></i>Tabela</button>
         <button class="normal-button hidden" id="pdf-button"><i class="fa-solid fa-file-pdf icon"></i>Exportar
           PDF</button>
+
+        <button class="normal-button" id="points-amount"></button>
+        <button class="normal-button" id="sold-points"></button>
+
+        <label for="image-picker" class="normal-button">
+          <i class="fa-solid fa-image icon"></i>Fundo
+        </label>
+        <input type="file" id="image-picker" accept="image/*" style="display: none;">
+
         <div id="buttons-row">
           <button class="normal-button" id="points-back"><i class="fa-solid fa-angle-left icon"></i>Anterior</button>
-          <button class="normal-button" id="pages-count"></button>
+          <span class="normal-button" id="pages-count"></span>
           <button class="normal-button" id="points-foward"><i class="fa-solid fa-angle-right icon"></i>Próxima</button>
-          <button class="normal-button" id="points-amount"></button>
-          <button class="normal-button" id="sold-points"></button>
-          <label for="image-picker" class="normal-button">
-            <i class="fa-solid fa-image icon"></i>Fundo
-          </label>
-          <input type="file" id="image-picker" accept="image/*">
+
           <button class="normal-button" id="border-color-button"></button>
           <button class="normal-button" id="back-color-button"></button>
           <button class="normal-button" id="font-color-button"></button>
+
           <div id="transform-controls"></div>
         </div>
       </div>
-      <button id="config-button" class="glassy"><i class="fa-solid fa-cog"></i></button>
-    </div>
-    <div id="slider-container" class="glassy hidden">
+
+      <button id="config-button" class="glassy" aria-label="Configurações"><i class="fa-solid fa-cog"></i></button>
+    </nav>
+
+    <aside id="slider-container" class="glassy hidden">
       <label for="slider" id="slider-label"></label>
       <div id="slider-row">
-        <button class="normal-button" id="slider-minus"><i class="fa-solid fa-minus icon"></i></button>
+        <button class="normal-button" id="slider-minus" aria-label="Diminuir valor"><i
+            class="fa-solid fa-minus icon"></i></button>
         <input id="slider" type="range" min="0" max="100" value="0" step="0.5">
-        <button class="normal-button" id="slider-plus"><i class="fa-solid fa-plus icon"></i></button>
+        <button class="normal-button" id="slider-plus" aria-label="Aumentar valor"><i
+            class="fa-solid fa-plus icon"></i></button>
       </div>
-    </div>
-  </div>
+    </aside>
+  </main>
 </body>
 
 </html>
